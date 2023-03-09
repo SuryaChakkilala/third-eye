@@ -1,0 +1,59 @@
+{% extends 'pages/main.html' %}
+
+{% load static %}
+
+{% block title %}Doctors{% endblock %}
+
+{% block content %}
+<div class="menu">
+    <div class="heading">
+      <h3>NoKitchen Menu</h3>
+    </div>
+    {% if not doctors %}
+        <div class="text-center">
+            <br>
+            <h1 class="text-center product_title">
+            No doctors found with that name.....
+            </h1>
+            <br>
+            <p class="text-center">
+            Please click <a href="{% url 'menu' %}">here</a> to continue have a look at our doctors
+            </p>
+        </div>
+    {% else %}
+    {% for d in doctors %}
+    {% if not d == request.user %}
+        <div class="food-items">
+            <div class="details">
+                <div class="details-sub">
+                    <h5>{{d.first_name}} {{d.last_name}}</h5><br />
+                    <p>Speciality: <u>{{d.doctor_speciality}}</u></p><br />
+                    <p>  {{d.address}} </p>
+                </div>
+                <p class="product_text">{{d.city}}</p>
+                <a href="{% url 'book_appointment' d.id %}">
+                    <button type="button" name="button" class="btn btn-warning">
+                        Book Appointment
+                    </button>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+    {% endfor %}
+
+        </div>
+    {% endif %}
+    <br><br>
+    <hr><br>
+    <center>
+        {% if doctors.has_previous %}
+            <a href="?page=1"><button class="btn btn-primary">&laquo; First</button></a>
+            <a href="?page={{foods.previous_page_number}}"><button class="btn btn-primary">&larr; Previous</button></a>
+        {% endif %}
+        Page {{doctors.number}} of {{doctors.paginator.num_pages}}
+        {% if doctors.has_next %}
+            <a href="?page={{doctors.next_page_number}}"><button class="btn btn-primary">&rarr; Next</button></a>
+            <a href="?page={{doctors.paginator.num_pages}}"><button class="btn btn-primary">&raquo; Last</button></a>
+        {% endif %}
+    </center>
+{% endblock %}

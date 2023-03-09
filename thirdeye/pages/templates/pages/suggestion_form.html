@@ -1,0 +1,20 @@
+{% extends 'pages/main.html' %}
+
+{% block title %}Book Appointment{% endblock title %}
+
+{% block content %}
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6"><br />
+            <h2>Suggestion Form</h2>
+            <hr />
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                Suggestion: <input type="text" name="suggestion" placeholder="Write suggestion..." /><br /><br />
+                Upload Prescription: <input type="file" name="prescription" /><br /><br />
+                <input type="submit"></input>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

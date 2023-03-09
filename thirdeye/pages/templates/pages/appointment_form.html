@@ -1,0 +1,32 @@
+{% extends 'pages/main.html' %}
+
+{% block title %}Book Appointment{% endblock title %}
+
+{% block content %}
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <h2>Book Appointment</h2>
+            <form method="POST">
+                {% csrf_token %}
+                Choose Date of Appointment: <input type="date" name="date_of_appointment" /><br />
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Choose Time Slot</label>
+                    </div>
+                    <select name='time' class="custom-select" id="inputGroupSelect01">
+                      <option value="10AM to 11AM">10AM to 11AM</option>
+                      <option value="11AM to 12PM">11AM to 12PM</option>
+                      <option value="12PM to 1PM">12PM to 1PM</option>
+                      <option value="6PM to 7PM">6PM to 7PM</option>
+                      <option value="7PM to 8PM">7PM to 8PM</option>
+                      <option value="8PM to 9PM">8PM to 9PM</option>
+                    </select>
+                  </div>
+                Reason: <input type="text" name="reason" /><br />
+                <input type="submit"></input>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
